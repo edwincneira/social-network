@@ -6,8 +6,23 @@ const routeUsers = Router()
 
 routeUsers.get("/", (req, res) => {
     // console.log("control", control())
-    const lista = control()
-    success(req, res, lista, 200)
+    control.list()
+        .then(list => {
+            success(req, res, list, 200)
+        })
+        .catch(err => {
+            error(req, res, err.message, 500)
+        })
+})
+
+routeUsers.get("/:id", (req, res) => {
+    control.get(req.params.id)
+        .then(user => {
+            success(req, res, user, 200)
+        })
+        .catch(err => {
+            error(req, res, err.message, 500)
+        })
 })
 
 export default routeUsers;

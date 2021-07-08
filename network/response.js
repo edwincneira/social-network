@@ -7,7 +7,6 @@ function success(req, res, message, status){
         status: statusCode,
         body: statusMessage,
     })
-
 }
 
 function error(req, res, message, status){
@@ -19,7 +18,6 @@ function error(req, res, message, status){
         status: statusCode,
         body: statusMessage,
     })
-
 }
 
 export {
