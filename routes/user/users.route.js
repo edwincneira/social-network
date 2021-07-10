@@ -1,28 +1,11 @@
 import { Router } from "express"
-import { success, error } from "../../network/response"
-import control from "./index"
+import { list, get, upsert } from "./users.routes.ctrl"
 
 const routeUsers = Router()
 
-routeUsers.get("/", (req, res) => {
-    // console.log("control", control())
-    control.list()
-        .then(list => {
-            success(req, res, list, 200)
-        })
-        .catch(err => {
-            error(req, res, err.message, 500)
-        })
-})
-
-routeUsers.get("/:id", (req, res) => {
-    control.get(req.params.id)
-        .then(user => {
-            success(req, res, user, 200)
-        })
-        .catch(err => {
-            error(req, res, err.message, 500)
-        })
-})
+routeUsers.get("/", list)
+routeUsers.get("/:id", get)
+routeUsers.post("/", upsert)
+routeUsers.put("/", upsert)
 
 export default routeUsers;

@@ -1,7 +1,7 @@
 const db = {
     "user": [
         { id: 1, name: "Edwin" },
-        { id: 2, name: "Andres"}
+        { id: 2, name: "Andres" }
     ]
 }
 
@@ -15,11 +15,23 @@ async function get(tabla, id) {
 }
 
 async function upsert(tabla, data) {
-    db[collection].push(data)
+    if (!db[tabla]) {
+        db[tabla] = [];
+    }
+    db[tabla].push(data)
+    console.log(db)
 }
 
 async function remove(tabla, id) {
     return true;
+}
+
+async function query(tabla, q) {
+    let col = await list(tabla)
+    let keys = Object.keys(q);
+    let key = keys[0];
+
+    return col.filter(item => item[key] === q[key])[0] || null;
 }
 
 export default {
@@ -27,4 +39,5 @@ export default {
     get,
     upsert,
     remove,
+    query,
 }
