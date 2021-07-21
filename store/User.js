@@ -27,7 +27,6 @@ async function remove(tabla, id) {
 }
 
 async function query(tabla, q) {
-    // console.log("tabla ", tabla)
     let col = await list(tabla)
     console.log(col)
     let keys = Object.keys(q);
