@@ -1,7 +1,7 @@
 import express from "express";
 import configurations from "../config";
 import morgan from "morgan"
-import routeUsers from "../routes/user/users.route"
+import routeUsers from "../routes/user/users.routes"
 import routerLogin from "../auth/auth.routes"
 
 const app = express();
