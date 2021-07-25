@@ -3,9 +3,9 @@ import { list, get, upsert } from "./users.routes.ctrl"
 
 const router = Router()
 
-router.get("/", list)
+router.get("/user", list)
 router.get("/:id", get)
-router.post("/", upsert)
-router.put("/", upsert)
+router.post("/user", upsert)
+router.put("/user", upsert)
 
 export default router;
