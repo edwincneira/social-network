@@ -1,4 +1,5 @@
 import { sign } from "../../auth/index"
+import bcrypt from "bcrypt"
 
 const TABLA = "auth"
 
@@ -8,27 +9,34 @@ export default function (inStore) {
         store = require("../../store/User")
     }
 
-    function upsert(data) {
+    async function upsert(data) {
         const authData = {
             id: data.id
         }
         if (data.username) {
             authData.username = data.username;
         }
-
+        console.log("first", data.password)
         if (data.password) {
-            authData.password = data.password;
+            authData.password = await bcrypt.hash(data.password, 7);
         }
+
+        console.log(authData)
+
         return store.upsert(TABLA, authData)
     }
 
     async function login(username, password) {
         const data = await store.query(TABLA, { username: username })
-        if (data.password === password) {
-            return sign(data)
-        } else {
-            throw new Error("Password wrong")
-        }
+
+        return bcrypt.compare(password, data.password)
+            .then(equal => {
+                if (equal) {
+                    return sign(data)
+                } else {
+                    throw new Error("F");
+                }
+            });
     }
 
     return {

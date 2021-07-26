@@ -1,3 +1,5 @@
-import { nanoid } from 'nanoid'
+import { PORT } from "../config"
 
-console.log(nanoid())
+// const { PORT } = config;
+
+console.log(PORT)
