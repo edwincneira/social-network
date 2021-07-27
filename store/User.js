@@ -1,7 +1,6 @@
 const db = {
     "user": [
         { id: 1, name: "Edwin" },
-        { id: 2, name: "Andres" }
     ]
 }
 

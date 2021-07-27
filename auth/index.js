@@ -7,18 +7,23 @@ export function sign(data) {
     return jwt.sign(data, JWT_PATRON)
 }
 
-function verify(token) {
+export function verify(token) {
     return jwt.verify(token, JWT_PATRON)
 }
 
-const check = {
-    own: function(req, owner) {
+export const check = {
+    own: function (req, owner) {
         const decoded = decodeHeader(req);
         console.log(decoded);
+        if(decoded.id !== owner){
+            console.log("decoded", decoded.id)
+            console.log("owner", owner)
+            throw new Error("You cannot edit")
+        }
     },
 }
 
-function getToken(auth) {
+export function getToken(auth) {
     if (!auth) {
         throw new Error('No viene token');
     }
@@ -26,17 +31,17 @@ function getToken(auth) {
     if (auth.indexOf('Bearer ') === -1) {
         throw new Error('Formato invalido');
     }
-
+    console.log(auth)
     let token = auth.replace('Bearer ', '');
     return token;
 }
 
-function decodeHeader(req) {
+export function decodeHeader(req) {
     const authorization = req.headers.authorization || '';
     const token = getToken(authorization);
     const decoded = verify(token);
 
     req.user = decoded;
-    
+
     return decoded;
 }

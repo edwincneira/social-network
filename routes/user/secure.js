@@ -1,4 +1,4 @@
-import auth from "../../auth"
+import { check } from "../../auth"
 
 export default function (action) {
     
@@ -6,11 +6,12 @@ export default function (action) {
         switch(action) {
             case 'update':
                 const owner = req.body.id;
-                auth.check.own(req, owner);
+                check.own(req, owner);
+                next()
                 break;
 
             default:
-                next();
+                console.log("hola");
         }
     }
 

@@ -1,5 +1,7 @@
-import { PORT } from "../config"
+import { sign, check, verify } from "../auth/index"
 
-// const { PORT } = config;
+console.log(sign)
 
-console.log(PORT)
+console.log(check)
+
+console.log(verify)
