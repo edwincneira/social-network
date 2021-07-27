@@ -11,7 +11,7 @@ export default function (action) {
                 break;
 
             default:
-                console.log("hola");
+                next()
         }
     }
 

@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import config from "../config"
+import { err } from "../utils/error"
 
 const { JWT_PATRON } = config;
 
@@ -16,9 +17,7 @@ export const check = {
         const decoded = decodeHeader(req);
         console.log(decoded);
         if(decoded.id !== owner){
-            console.log("decoded", decoded.id)
-            console.log("owner", owner)
-            throw new Error("You cannot edit")
+            throw err("Yo can't edit", 401)
         }
     },
 }
