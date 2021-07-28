@@ -1,5 +1,6 @@
 import { sign } from "../../auth/index"
 import bcrypt from "bcrypt"
+import { err } from "../../utils/error";
 
 const TABLA = "auth"
 
@@ -34,7 +35,7 @@ export default function (inStore) {
                 if (equal) {
                     return sign(data)
                 } else {
-                    throw new Error("F");
+                    throw err("Password wrong", 406);
                 }
             });
     }
