@@ -39,9 +39,17 @@ export default function (inStore) {
         return store.upsert(TABLA, user)
     }
 
+    function follow(from, to) {
+        return store.upsert(TABLA + "_follow", {
+            user_from: from,
+            user_to: to,
+        })
+    }
+
     return {
         list,
         get,
         upsert,
+        follow,
     };
 }

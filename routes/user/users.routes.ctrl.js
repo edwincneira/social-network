@@ -30,3 +30,11 @@ export function upsert(req, res) {
             error(req, res, err.message, 500)
         })
 }
+
+export function follow(req, res, next) {
+    control.follow(req.user.id, req.params.id)
+        .then(data => {
+            success(req, res, data, 201)
+        })
+        .catch(next)
+}

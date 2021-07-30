@@ -13,6 +13,6 @@ const { MONGO_URL, NAME_DB } = config;
         });
         console.log("Mongodb connected to", NAME_DB)
     } catch (error) {
-        console.error("db failed ", error)
+        console.log("db failed ", error)
     }
-})()
+})();

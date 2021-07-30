@@ -1,3 +1,5 @@
+import User from "../models/User"
+
 const db = {
     "user": [
         { id: 1, name: "Edwin" },
@@ -5,7 +7,13 @@ const db = {
 }
 
 async function list(table) {
-    return db[table] || [];
+    
+
+    const data = await User.find({})
+    // await User.updateOne({ name: "Anny" }, { name: "Lorena" } )
+    // console.log(data)
+
+    return data || [];
 }
 
 async function get(tabla, id) {

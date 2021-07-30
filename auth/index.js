@@ -20,6 +20,9 @@ export const check = {
             throw err("Yo can't edit", 401)
         }
     },
+    token: function (req) {
+        
+    }
 }
 
 export function getToken(auth) {
