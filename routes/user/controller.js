@@ -1,7 +1,6 @@
 //no depender de la misma base de datos
 import { nanoid } from "nanoid"
 import auth from "../auth";
-const TABLA = "user"
 
 export default function (inStore) {
     let store = inStore;
@@ -10,11 +9,11 @@ export default function (inStore) {
     }
 
     function list() {
-        return store.list(TABLA);
+        return store.list();
     }
 
     function get(id) {
-        return store.get(TABLA, id)
+        return store.get(id)
     }
 
     async function upsert(body) {
@@ -23,27 +22,25 @@ export default function (inStore) {
             username: body.username,
         }
 
-        if (body.id) {
-            user.id = body.id;
-        } else {
-            user.id = nanoid()
-        }
+        store.upsert(user)
 
         if (body.password || body.username) {
             await auth.upsert({
-                id: user.id,
                 username: user.username,
                 password: body.password,
             })
         }
-        return store.upsert(TABLA, user)
     }
 
-    function follow(from, to) {
-        return store.upsert(TABLA + "_follow", {
-            user_from: from,
-            user_to: to,
-        })
+    // function follow(from, to) {
+    //     return store.upsert(TABLA + "_follow", {
+    //         user_from: from,
+    //         user_to: to,
+    //     })
+    // }
+
+    async function follow() {
+        return store.query()
     }
 
     return {

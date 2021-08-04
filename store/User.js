@@ -1,43 +1,63 @@
 import User from "../models/User"
+import Auth from "../models/Auth"
 
-const db = {
-    "user": [
-        { id: 1, name: "Edwin" },
-    ]
-}
-
-async function list(table) {
-    
+async function list() {
 
     const data = await User.find({})
+    const filtrado = data.map(obj => {
+        return {
+            _id: obj._id,
+            username: obj.username,
+        }
+    })
+    // console.log(filtrado)
     // await User.updateOne({ name: "Anny" }, { name: "Lorena" } )
     // console.log(data)
-
-    return data || [];
+    return filtrado || [];
 }
 
-async function get(tabla, id) {
-    let col = await list(tabla)
-    return col.filter(item => item.id == id)[0] || null;
+async function get(id) {
+    let col = await list()
+    return col.filter(item => String(item._id) === id) || null;
 }
 
-async function upsert(tabla, data) {
-    if (!db[tabla]) {
-        db[tabla] = [];
+async function upsert(collection, data) {
+    if (collection === "auth") {
+        await new Auth({
+            username: data.username,
+            password: data.password,
+        })
+    } else {
+        await new User({
+            name: data.name,
+            username: data.username,
+            password: data.password,
+        })
     }
-    db[tabla].push(data)
 }
 
-async function remove(tabla, id) {
-    return true;
+async function remove(id) {
+    try {
+        await User.findByIdAndDelete(id);
+        return true;
+    } catch (err) {
+        throw new Error("Cannot delete the document")
+    }
 }
 
-async function query(tabla, q) {
-    let col = await list(tabla)
-    let keys = Object.keys(q);
-    let key = keys[0];
+async function query() {
+    // if(collection === "auth") {
+    //     const search = await User.findOne(q)
+    //     console.log("search ", search)
+    // }
+    // console.log("perras")
+    // let col = await list(tabla)
+    // let keys = Object.keys(q);
+    // let key = keys[0];
 
-    return col.filter(item => item[key] === q[key])[0] || null;
+    // return col.filter(item => item[key] === q[key])[0] || null;
+
+    return await User.find({})
 }
 
 export default {

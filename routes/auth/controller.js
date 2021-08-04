@@ -2,7 +2,7 @@ import { sign } from "../../auth/index"
 import bcrypt from "bcrypt"
 import { err } from "../../utils/error";
 
-const TABLA = "auth"
+const COLLECTION = "auth"
 
 export default function (inStore) {
     let store = inStore;
@@ -11,24 +11,20 @@ export default function (inStore) {
     }
 
     async function upsert(data) {
-        const authData = {
-            id: data.id
-        }
+        
         if (data.username) {
             authData.username = data.username;
         }
-        console.log("first", data.password)
+        
         if (data.password) {
             authData.password = await bcrypt.hash(data.password, 7);
         }
 
-        console.log(authData)
-
-        return store.upsert(TABLA, authData)
+        return store.upsert(COLLECTION, authData)
     }
 
     async function login(username, password) {
-        const data = await store.query(TABLA, { username: username })
+        const data = await store.query(COLLECTION, { username: username })
 
         return bcrypt.compare(password, data.password)
             .then(equal => {
