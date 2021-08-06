@@ -40,7 +40,7 @@ export default function (inStore) {
     // }
 
     async function follow() {
-        return store.query()
+        return store.query("auth", { username: "andrescneira" })
     }
 
     return {

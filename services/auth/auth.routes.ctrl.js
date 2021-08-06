@@ -7,6 +7,6 @@ export function login(req, res){
             success(req, res, token, 200);
         })
         .catch(err => {
-            error(req, res, err.message, 400);
+            error(req, res, err, 400);
         })
 }

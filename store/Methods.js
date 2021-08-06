@@ -13,11 +13,12 @@ async function list() {
     // console.log(filtrado)
     // await User.updateOne({ name: "Anny" }, { name: "Lorena" } )
     // console.log(data)
-    return filtrado || [];
+    return { dir: "users/signin", document: filtrado } || [];
 }
 
 async function get(id) {
-    let col = await list()
+    // let col = await list()
+    let col = []
     return col.filter(item => String(item._id) === id) || null;
 }
 
@@ -41,23 +42,20 @@ async function remove(id) {
         await User.findByIdAndDelete(id);
         return true;
     } catch (err) {
-        throw new Error("Cannot delete the document")
+        throw new Error("Cannot delete the document");
     }
 }
 
-async function query() {
-    // if(collection === "auth") {
-    //     const search = await User.findOne(q)
-    //     console.log("search ", search)
-    // }
-    // console.log("perras")
-    // let col = await list(tabla)
-    // let keys = Object.keys(q);
-    // let key = keys[0];
+async function query(collection, q) {
 
-    // return col.filter(item => item[key] === q[key])[0] || null;
+    let search;
+    if (collection === "auth") {
+        search = await Auth.findOne(q);
+    } else {
+        search = await User.findOne(q);
+    }
 
-    return await User.find({})
+    return search;
 }
 
 export default {

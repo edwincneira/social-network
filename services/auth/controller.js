@@ -7,7 +7,7 @@ const COLLECTION = "auth"
 export default function (inStore) {
     let store = inStore;
     if (!store) {
-        store = require("../../store/User")
+        store = require("../../store/Methods")
     }
 
     async function upsert(data) {
