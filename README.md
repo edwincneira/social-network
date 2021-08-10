@@ -32,7 +32,7 @@ now.json
 
 # content
 
-profile -> image, follow, post 
+profile -> image, follow, posts
 signup
 signin
 
