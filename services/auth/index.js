@@ -1,4 +1,4 @@
 import controller from "./controller";
-import store from "../../store/User"
+import store from "../../store/Methods"
 
 export default controller(store)

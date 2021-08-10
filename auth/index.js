@@ -20,15 +20,18 @@ export const check = {
             throw err("Yo can't edit", 401)
         }
     },
+    token: function (req) {
+        
+    }
 }
 
 export function getToken(auth) {
     if (!auth) {
-        throw new Error('No viene token');
+        throw new Error("Don't get token", 407);
     }
 
     if (auth.indexOf('Bearer ') === -1) {
-        throw new Error('Formato invalido');
+        throw new Error('Format invalid', 406);
     }
     console.log(auth)
     let token = auth.replace('Bearer ', '');
