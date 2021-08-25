@@ -11,11 +11,11 @@ export default function (inStore) {
     }
 
     async function upsert(data) {
-        
+
         if (data.username) {
             authData.username = data.username;
         }
-        
+
         if (data.password) {
             authData.password = await bcrypt.hash(data.password, 7);
         }
@@ -36,8 +36,18 @@ export default function (inStore) {
             });
     }
 
+    async function signup(username, password) {
+        if (!password || !username) {
+            console.log("Missing data")
+            return false;
+        } else {
+            return store.signup(username, password)
+        }
+    }
+
     return {
         upsert,
         login,
+        signup,
     }
 }

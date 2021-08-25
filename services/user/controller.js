@@ -5,15 +5,19 @@ import auth from "../auth";
 export default function (inStore) {
     let store = inStore;
     if (!store) {
-        store = require("../store/User")
+        store = require("../store/Methods")
     }
 
     function list() {
         return store.list();
     }
 
-    function get(id) {
-        return store.get(id)
+    function get(header) {
+        return store.get(header)
+    }
+
+    function add() {
+        return store.add();
     }
 
     async function upsert(body) {
@@ -32,6 +36,10 @@ export default function (inStore) {
         }
     }
 
+    function remove(id){
+        return store.remove(id)
+    }
+
     // function follow(from, to) {
     //     return store.upsert(TABLA + "_follow", {
     //         user_from: from,
@@ -48,5 +56,6 @@ export default function (inStore) {
         get,
         upsert,
         follow,
+        remove,
     };
 }

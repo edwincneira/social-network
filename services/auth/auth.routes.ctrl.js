@@ -10,3 +10,13 @@ export function login(req, res){
             error(req, res, err, 400);
         })
 }
+
+export function signup(req, res) {
+    control.signup(req.body.username, req.body.password)
+        .then(ready => {
+            success(req, res, ready, 201)
+        })
+        .catch(err => {
+            error(req, res, err, 400)
+        })
+}

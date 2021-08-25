@@ -13,13 +13,25 @@ async function list() {
     // console.log(filtrado)
     // await User.updateOne({ name: "Anny" }, { name: "Lorena" } )
     // console.log(data)
-    return { dir: "users/signin", document: filtrado } || [];
+    return filtrado || [];
 }
 
-async function get(id) {
+async function get(header) {
     // let col = await list()
     let col = []
-    return col.filter(item => String(item._id) === id) || null;
+    // return col.filter(item => String(item._id) === id) || null;
+    return header;
+}
+
+async function add() {
+
+}
+
+async function signup(username, password) {
+    await new User({
+        username: username,
+        password: password,
+    });
 }
 
 async function upsert(collection, data) {
@@ -61,7 +73,9 @@ async function query(collection, q) {
 export default {
     list,
     get,
+    add,
     upsert,
     remove,
     query,
+    signup,
 }

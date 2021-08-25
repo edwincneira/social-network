@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
 
-const postSchema = new Schema({
-    title: { type: String, required: true},
-    content: { type: String, required: false},
+const User = new Schema({
+    title: { type: String, required: true },
+    content: { type: String, required: false }
 })
 
-export default model("Post", postSchema)
+export default model("User", User)

@@ -40,9 +40,9 @@ app.use(session({
 }));
 
 //routes
-// app.use(routeUsers);
+app.use(routeUsers);
 // app.use(routerLogin);
-app.use(routerTest)
+// app.use(routerTest)
 //gestion of errors
 app.use(errors);
 
