@@ -16,7 +16,7 @@ export default function (inStore) {
         return store.get(header)
     }
 
-    function add() {
+    async function add() {
         return store.add();
     }
 
@@ -54,6 +54,7 @@ export default function (inStore) {
     return {
         list,
         get,
+        add,
         upsert,
         follow,
         remove,

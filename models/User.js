@@ -4,7 +4,7 @@ const User = new Schema({
     name: { type: String, required: false },
     username: { type: String, required: true },
     password: { type: String, required: true },
-    posts: { type: Object, required: false },
+    posts: { type: Array, required: false },
     followers: { type: Array, required: false },
     follows: { type: Array, required: false }
 });

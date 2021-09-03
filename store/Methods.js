@@ -1,5 +1,6 @@
 import User from "../models/User"
 import Auth from "../models/Auth"
+import Post from "../models/Post"
 
 async function list() {
 
@@ -10,9 +11,9 @@ async function list() {
             username: obj.username,
         }
     })
-    // console.log(filtrado)
-    // await User.updateOne({ name: "Anny" }, { name: "Lorena" } )
-    // console.log(data)
+
+    console.log(filtrado)
+    
     return filtrado || [];
 }
 
@@ -24,7 +25,22 @@ async function get(header) {
 }
 
 async function add() {
+    const newPost = await new Post({
+        title: "edit user",
+        content: "contenido"
+    })
 
+    const newUser = await new User({
+        username: "yesica",
+        password: "123456",
+        posts: [],    
+    })
+    
+    // await newUser.save();
+
+    const test = newUser
+    console.log(test)
+    
 }
 
 async function signup(username, password) {
